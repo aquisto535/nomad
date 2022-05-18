@@ -8,7 +8,8 @@
   "author": "taemin",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.3",
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
     "mongoose": "^6.3.1",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
