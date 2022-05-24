@@ -4,6 +4,8 @@ import session from "express-session";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
+import { localsMiddleware } from "./middlewares";
+import MongoStore from "connect-mongo";
 
 
 
@@ -16,12 +18,17 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({ extended: true}))
 
-app.use(session({
+app.use(
+  session({
     secret:"hello",
     resave: true,
     saveUninitialized: true, 
+    store: MongoStore.create({ mongoUrl: "mongodb://localhost:27017/nomad" }),
 }))
 
+
+
+app.use(localsMiddleware)
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
