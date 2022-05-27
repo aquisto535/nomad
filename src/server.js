@@ -20,15 +20,17 @@ app.use(express.urlencoded({ extended: true}))
 
 app.use(
   session({
-    secret:"hello",
-    resave: true,
-    saveUninitialized: true, 
-    store: MongoStore.create({ mongoUrl: "mongodb://localhost:27017/nomad" }),
+    secret:process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false, 
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
 }))
 
 
 
 app.use(localsMiddleware)
+
+
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
