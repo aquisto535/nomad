@@ -1,6 +1,6 @@
 import User from "../models/User";
-import bcrypt from "bcrypt";
 import fetch from "node-fetch";
+import bcrypt from "bcrypt";
 
 export const getjoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
@@ -210,7 +210,7 @@ export const postChangepassword = async (req, res, next) => {
       user: { _id, password },
     },
     body: { oldPassword, newPassword, newPasswordConfirmation },
-  } = req; // How to check user
+  } = req; // How to check user. it's from pug's Data(HTML)
 
   const ok = await bcrypt.compare(oldPassword, password);
   if (!ok) {
@@ -238,10 +238,12 @@ export const postChangepassword = async (req, res, next) => {
 
 export const see = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("videos");
+  // populate makes it possible to Add videos array to user.and it uploads everything of videos.
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }
+  console.log(user);
   return res.render("users/profile", {
     pageTitle: user.name,
     user,
