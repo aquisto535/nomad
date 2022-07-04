@@ -2,16 +2,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/client/js/main.js", // start file
-  watch: true, // it makes keep moving console and front-end console possible
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "css/styles.css",
-    }),
-  ],
+  entry: {
+    main: "./src/client/js/main.js",
+    videoPlayer: "./src/client/js/videoPlayer.js",
+  },
   mode: "development", // show whether this whole file is on developing or finished.
   output: {
-    filename: "js/main.js",
+    filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"), // designate the path and destination
     clean: true,
   },
@@ -28,7 +25,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.scss$/, // all the scss file be gathered
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], //webpack starts from backward! sass is the first!
       },
     ],

@@ -18,8 +18,6 @@ import {
 
 const userRouter = express.Router();
 
-userRouter.get("/logout", protectorMiddleware, logout);
-
 userRouter
   .route("/edit")
   .all(protectorMiddleware)
@@ -34,6 +32,7 @@ userRouter
 
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
+userRouter.get("/logout", protectorMiddleware, logout);
 userRouter.get("/:id", see);
 
 export default userRouter;
