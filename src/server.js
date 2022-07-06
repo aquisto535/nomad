@@ -6,6 +6,7 @@ import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 import { localsMiddleware } from "./middlewares";
 import MongoStore from "connect-mongo";
+import apiRouter from "./routers/apirouter";
 
 const app = express();
 const logger = morgan("dev");
@@ -26,9 +27,10 @@ app.use(
 
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // ask express to user see inside of folder
-app.use("/assets", express.static("assets")); // ask express to user see inside of folder
+app.use("/assets", express.static("assets" + "/public/")); // ask express to user see inside of folder
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
+app.use("/api", apiRouter);
 
 export default app;
