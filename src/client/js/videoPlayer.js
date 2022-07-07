@@ -114,6 +114,10 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000); // create new timeout
 };
 
+const handleEnded = () => {
+  console.log("video finished");
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMuteClick);
 volumeRange.addEventListener("input", handleVolumeChange);
@@ -124,4 +128,5 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 video.addEventListener("click", handlePlayClick);
+video.addEventListener("ended", handleEnded);
 document.addEventListener("keydown", handleKeydown);
