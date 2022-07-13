@@ -27,7 +27,7 @@ app.use(
 
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // ask express to user see inside of folder
-app.use("/assets", express.static("assets" + "/public/")); // ask express to user see inside of folder
+app.use("/static", express.static("assets")); // ask express to user see inside of folder
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
